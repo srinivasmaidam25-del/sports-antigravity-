@@ -82,29 +82,41 @@ foreach ($storageDirs as $dir) {
 
 // Serve compiled static assets (CSS, JS, Fonts, Images)
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '');
-$publicFile = __DIR__ . '/../public' . $uri;
 
-if ($uri !== '/' && file_exists($publicFile) && !is_dir($publicFile)) {
-    $ext = strtolower(pathinfo($publicFile, PATHINFO_EXTENSION));
-    $mimeTypes = [
-        'css'   => 'text/css; charset=utf-8',
-        'js'    => 'application/javascript; charset=utf-8',
-        'json'  => 'application/json; charset=utf-8',
-        'png'   => 'image/png',
-        'jpg'   => 'image/jpeg',
-        'jpeg'  => 'image/jpeg',
-        'gif'   => 'image/gif',
-        'svg'   => 'image/svg+xml',
-        'ico'   => 'image/x-icon',
-        'woff'  => 'font/woff',
-        'woff2' => 'font/woff2',
-        'ttf'   => 'font/ttf',
+if ($uri !== '/') {
+    $possiblePaths = [
+        __DIR__ . '/../public' . $uri,
+        __DIR__ . '/..' . $uri,
+        __DIR__ . $uri,
+        dirname(__DIR__) . '/public' . $uri,
+        '/var/task/user/public' . $uri,
+        '/var/task/public' . $uri,
     ];
 
-    header('Content-Type: ' . ($mimeTypes[$ext] ?? 'application/octet-stream'));
-    header('Cache-Control: public, max-age=31536000, immutable');
-    readfile($publicFile);
-    exit;
+    foreach ($possiblePaths as $publicFile) {
+        if (file_exists($publicFile) && !is_dir($publicFile)) {
+            $ext = strtolower(pathinfo($publicFile, PATHINFO_EXTENSION));
+            $mimeTypes = [
+                'css'   => 'text/css; charset=utf-8',
+                'js'    => 'application/javascript; charset=utf-8',
+                'json'  => 'application/json; charset=utf-8',
+                'png'   => 'image/png',
+                'jpg'   => 'image/jpeg',
+                'jpeg'  => 'image/jpeg',
+                'gif'   => 'image/gif',
+                'svg'   => 'image/svg+xml',
+                'ico'   => 'image/x-icon',
+                'woff'  => 'font/woff',
+                'woff2' => 'font/woff2',
+                'ttf'   => 'font/ttf',
+            ];
+
+            header('Content-Type: ' . ($mimeTypes[$ext] ?? 'application/octet-stream'));
+            header('Cache-Control: public, max-age=31536000, immutable');
+            readfile($publicFile);
+            exit;
+        }
+    }
 }
 
 require __DIR__ . '/../public/index.php';
