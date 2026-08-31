@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Contracts\Foundation\MaintenanceMode;
+use Illuminate\Foundation\FileBasedMaintenanceMode;
 
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,6 +24,11 @@ $app = Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
+
+// Bind maintenance mode explicitly
+$app->singleton(MaintenanceMode::class, function () {
+    return new FileBasedMaintenanceMode();
+});
 
 // Dynamic storage path for serverless Vercel read-only filesystem
 if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || env('VERCEL') || env('APP_STORAGE')) {
