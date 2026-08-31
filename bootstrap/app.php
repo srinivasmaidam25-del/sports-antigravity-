@@ -3,7 +3,6 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Http\Request;
 
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -21,16 +20,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->render(function (\Throwable $e, Request $request) {
-            return response(
-                "<h1>Original Boot Error:</h1>" .
-                "<p><strong>Exception:</strong> " . get_class($e) . "</p>" .
-                "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>" .
-                "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>" .
-                "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>",
-                500
-            );
-        });
+        //
     })->create();
 
 // Dynamic storage path for serverless Vercel read-only filesystem
