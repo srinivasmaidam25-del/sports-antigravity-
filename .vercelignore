@@ -3,3 +3,4 @@
 /storage
 *.sqlite
 .env
+/public/index.php
