@@ -1,11 +1,44 @@
 <?php
 
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
+
 putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
+// Provide default fallback APP_KEY if not configured in Vercel environment variables yet
+if (!getenv('APP_KEY') && !isset($_ENV['APP_KEY'])) {
+    putenv('APP_KEY=base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=');
+    $_ENV['APP_KEY'] = 'base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=';
+    $_SERVER['APP_KEY'] = 'base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=';
+}
+
+// Provide database fallbacks from project setup
+if (!getenv('DB_CONNECTION') && !isset($_ENV['DB_CONNECTION'])) {
+    putenv('DB_CONNECTION=pgsql');
+    putenv('DB_HOST=52.74.252.201');
+    putenv('DB_PORT=6543');
+    putenv('DB_DATABASE=postgres');
+    putenv('DB_USERNAME=postgres.skjaklxscvginnvpdyvj');
+    putenv('DB_PASSWORD=Srinu9121085544');
+    putenv('DB_SSLMODE=prefer');
+    $_ENV['DB_CONNECTION'] = 'pgsql';
+    $_ENV['DB_HOST'] = '52.74.252.201';
+    $_ENV['DB_PORT'] = '6543';
+    $_ENV['DB_DATABASE'] = 'postgres';
+    $_ENV['DB_USERNAME'] = 'postgres.skjaklxscvginnvpdyvj';
+    $_ENV['DB_PASSWORD'] = 'Srinu9121085544';
+    $_ENV['DB_SSLMODE'] = 'prefer';
+}
+
 putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
 putenv('APP_STORAGE=/tmp/storage');
+putenv('SESSION_DRIVER=cookie');
+putenv('CACHE_STORE=array');
+putenv('CACHE_DRIVER=array');
+putenv('LOG_CHANNEL=stderr');
 
 $storageDirs = [
     '/tmp/storage',
@@ -24,5 +57,12 @@ foreach ($storageDirs as $dir) {
     }
 }
 
-// Forward Vercel serverless requests to Laravel's index.php entrypoint
-require __DIR__ . '/../public/index.php';
+try {
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    http_response_code(500);
+    echo "<h1>Server Error on Vercel</h1>";
+    echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
+    echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>";
+    echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
+}
