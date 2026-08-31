@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
 use Illuminate\Foundation\FileBasedMaintenanceMode;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,5 +26,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Config::set('database.default', 'pgsql');
+
+        if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' || isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
+            URL::forceScheme('https');
+        }
     }
 }
