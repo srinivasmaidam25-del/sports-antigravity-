@@ -80,4 +80,31 @@ foreach ($storageDirs as $dir) {
     }
 }
 
+// Serve compiled static assets (CSS, JS, Fonts, Images)
+$uri = urldecode(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '');
+$publicFile = __DIR__ . '/../public' . $uri;
+
+if ($uri !== '/' && file_exists($publicFile) && !is_dir($publicFile)) {
+    $ext = strtolower(pathinfo($publicFile, PATHINFO_EXTENSION));
+    $mimeTypes = [
+        'css'   => 'text/css; charset=utf-8',
+        'js'    => 'application/javascript; charset=utf-8',
+        'json'  => 'application/json; charset=utf-8',
+        'png'   => 'image/png',
+        'jpg'   => 'image/jpeg',
+        'jpeg'  => 'image/jpeg',
+        'gif'   => 'image/gif',
+        'svg'   => 'image/svg+xml',
+        'ico'   => 'image/x-icon',
+        'woff'  => 'font/woff',
+        'woff2' => 'font/woff2',
+        'ttf'   => 'font/ttf',
+    ];
+
+    header('Content-Type: ' . ($mimeTypes[$ext] ?? 'application/octet-stream'));
+    header('Cache-Control: public, max-age=31536000, immutable');
+    readfile($publicFile);
+    exit;
+}
+
 require __DIR__ . '/../public/index.php';
