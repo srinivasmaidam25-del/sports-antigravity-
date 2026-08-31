@@ -3,6 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/build/assets/{file}', function ($file) {
+    $path = public_path('build/assets/' . $file);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    $mime = str_ends_with($file, '.css') ? 'text/css; charset=utf-8' : (str_ends_with($file, '.js') ? 'application/javascript; charset=utf-8' : 'application/octet-stream');
+    return response()->file($path, [
+        'Content-Type' => $mime,
+        'Cache-Control' => 'public, max-age=31536000, immutable'
+    ]);
+})->where('file', '.*');
+
 Route::get('/', function () {
     return view('welcome');
 });
