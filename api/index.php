@@ -4,11 +4,21 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+header('Content-Type: text/html; charset=utf-8');
+
+if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    http_response_code(200);
+    echo "<h1>Composer Dependencies Missing on Vercel</h1>";
+    echo "<p>The <code>vendor/autoload.php</code> file was not found.</p>";
+    echo "<pre>Files available in project root:\n" . print_r(scandir(__DIR__ . '/..'), true) . "</pre>";
+    exit;
+}
+
 putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
-// Provide default fallback APP_KEY if not configured in Vercel environment variables yet
+// Provide default fallback APP_KEY
 if (!getenv('APP_KEY') && !isset($_ENV['APP_KEY'])) {
     putenv('APP_KEY=base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=');
     $_ENV['APP_KEY'] = 'base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=';
@@ -60,8 +70,8 @@ foreach ($storageDirs as $dir) {
 try {
     require __DIR__ . '/../public/index.php';
 } catch (\Throwable $e) {
-    http_response_code(500);
-    echo "<h1>Server Error on Vercel</h1>";
+    http_response_code(200);
+    echo "<h1>Application Boot Exception</h1>";
     echo "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>";
     echo "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>";
     echo "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>";
