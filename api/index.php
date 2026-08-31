@@ -4,10 +4,6 @@ putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
-putenv('APP_DEBUG=true');
-$_ENV['APP_DEBUG'] = 'true';
-$_SERVER['APP_DEBUG'] = 'true';
-
 // Fallback APP_KEY
 if (empty(getenv('APP_KEY')) || empty($_ENV['APP_KEY'])) {
     putenv('APP_KEY=base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=');
@@ -80,10 +76,12 @@ foreach ($storageDirs as $dir) {
     }
 }
 
-// Serve compiled static assets (CSS, JS, Fonts, Images)
+// Serve compiled static assets (CSS, JS, Fonts, Images) safely
 $uri = urldecode(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?? '');
+$ext = strtolower(pathinfo($uri, PATHINFO_EXTENSION));
+$allowedStaticExtensions = ['css', 'js', 'json', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'ico', 'woff', 'woff2', 'ttf', 'map'];
 
-if ($uri !== '/') {
+if (!empty($ext) && in_array($ext, $allowedStaticExtensions)) {
     $possiblePaths = [
         __DIR__ . '/../public' . $uri,
         __DIR__ . '/..' . $uri,
@@ -95,7 +93,6 @@ if ($uri !== '/') {
 
     foreach ($possiblePaths as $publicFile) {
         if (file_exists($publicFile) && !is_dir($publicFile)) {
-            $ext = strtolower(pathinfo($publicFile, PATHINFO_EXTENSION));
             $mimeTypes = [
                 'css'   => 'text/css; charset=utf-8',
                 'js'    => 'application/javascript; charset=utf-8',
@@ -109,6 +106,7 @@ if ($uri !== '/') {
                 'woff'  => 'font/woff',
                 'woff2' => 'font/woff2',
                 'ttf'   => 'font/ttf',
+                'map'   => 'application/json; charset=utf-8',
             ];
 
             header('Content-Type: ' . ($mimeTypes[$ext] ?? 'application/octet-stream'));
