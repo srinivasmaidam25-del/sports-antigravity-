@@ -4,6 +4,10 @@ putenv('VERCEL=1');
 $_ENV['VERCEL'] = '1';
 $_SERVER['VERCEL'] = '1';
 
+putenv('APP_DEBUG=true');
+$_ENV['APP_DEBUG'] = 'true';
+$_SERVER['APP_DEBUG'] = 'true';
+
 // Fallback APP_KEY
 if (!getenv('APP_KEY') && !isset($_ENV['APP_KEY'])) {
     putenv('APP_KEY=base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=');
