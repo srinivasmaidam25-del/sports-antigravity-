@@ -22,19 +22,7 @@ $app = Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->respond(function ($response, $e) {
-            if ($e instanceof \Throwable) {
-                return response(
-                    "<h1>Runtime Exception Caught:</h1>" .
-                    "<p><strong>Class:</strong> " . get_class($e) . "</p>" .
-                    "<p><strong>Message:</strong> " . htmlspecialchars($e->getMessage()) . "</p>" .
-                    "<p><strong>File:</strong> " . htmlspecialchars($e->getFile()) . ":" . $e->getLine() . "</p>" .
-                    "<pre>" . htmlspecialchars($e->getTraceAsString()) . "</pre>",
-                    500
-                );
-            }
-            return $response;
-        });
+        //
     })->create();
 
 // Bind maintenance mode explicitly
