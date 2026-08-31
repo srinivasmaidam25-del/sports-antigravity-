@@ -1,14 +1,27 @@
 <?php
 
-// Fix storage paths for Vercel serverless read-only filesystem
-if (!is_dir('/tmp/storage')) {
-    @mkdir('/tmp/storage', 0777, true);
-    @mkdir('/tmp/storage/framework', 0777, true);
-    @mkdir('/tmp/storage/framework/views', 0777, true);
-    @mkdir('/tmp/storage/framework/cache', 0777, true);
-    @mkdir('/tmp/storage/framework/cache/data', 0777, true);
-    @mkdir('/tmp/storage/framework/sessions', 0777, true);
-    @mkdir('/tmp/storage/logs', 0777, true);
+putenv('VERCEL=1');
+$_ENV['VERCEL'] = '1';
+$_SERVER['VERCEL'] = '1';
+
+putenv('VIEW_COMPILED_PATH=/tmp/storage/framework/views');
+putenv('APP_STORAGE=/tmp/storage');
+
+$storageDirs = [
+    '/tmp/storage',
+    '/tmp/storage/app',
+    '/tmp/storage/framework',
+    '/tmp/storage/framework/views',
+    '/tmp/storage/framework/cache',
+    '/tmp/storage/framework/cache/data',
+    '/tmp/storage/framework/sessions',
+    '/tmp/storage/logs',
+];
+
+foreach ($storageDirs as $dir) {
+    if (!is_dir($dir)) {
+        @mkdir($dir, 0777, true);
+    }
 }
 
 // Forward Vercel serverless requests to Laravel's index.php entrypoint
