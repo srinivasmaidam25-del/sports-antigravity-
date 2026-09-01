@@ -29,7 +29,17 @@
                 }
             }
         </script>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @php
+            $cssFile = public_path('build/assets/app-5j_CctYh.css');
+            if (!file_exists($cssFile)) {
+                $cssFile = base_path('public/build/assets/app-5j_CctYh.css');
+            }
+        @endphp
+        @if(file_exists($cssFile))
+            <style>
+                {!! file_get_contents($cssFile) !!}
+            </style>
+        @endif
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

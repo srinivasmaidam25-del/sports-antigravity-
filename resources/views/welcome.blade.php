@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS (CDN & Vite) & Livewire Styles -->
+    <!-- Tailwind CSS (CDN & Inline) & Livewire Styles -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
@@ -28,7 +28,17 @@
             }
         }
     </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php
+        $cssFile = public_path('build/assets/app-5j_CctYh.css');
+        if (!file_exists($cssFile)) {
+            $cssFile = base_path('public/build/assets/app-5j_CctYh.css');
+        }
+    @endphp
+    @if(file_exists($cssFile))
+        <style>
+            {!! file_get_contents($cssFile) !!}
+        </style>
+    @endif
     @livewireStyles
 
     <!-- Inline Custom Styles -->

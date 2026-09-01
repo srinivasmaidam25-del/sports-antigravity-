@@ -22,6 +22,17 @@
     </script>
     <!-- Alpine.js CDN -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    @php
+        $cssFile = public_path('build/assets/app-5j_CctYh.css');
+        if (!file_exists($cssFile)) {
+            $cssFile = base_path('public/build/assets/app-5j_CctYh.css');
+        }
+    @endphp
+    @if(file_exists($cssFile))
+        <style>
+            {!! file_get_contents($cssFile) !!}
+        </style>
+    @endif
 </head>
 <body class="bg-gray-950 text-gray-100 min-h-screen">
 
