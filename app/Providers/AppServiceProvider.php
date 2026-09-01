@@ -25,9 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Config::set('database.default', 'pgsql');
-
-        if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' || isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL'])) {
+        if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || env('VERCEL') || env('APP_STORAGE')) {
+            Config::set('database.default', 'pgsql');
             URL::forceScheme('https');
         }
     }
