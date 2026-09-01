@@ -5,19 +5,10 @@
       "runtime": "vercel-php@0.7.3"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/api/index.php"
+      "src": "/(.*)",
+      "dest": "/api/index.php"
     }
-  ],
-  "env": {
-    "APP_ENV": "production",
-    "APP_DEBUG": "false",
-    "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
-    "APP_STORAGE": "/tmp/storage",
-    "CACHE_DRIVER": "array",
-    "SESSION_DRIVER": "cookie",
-    "LOG_CHANNEL": "stderr"
-  }
+  ]
 }
