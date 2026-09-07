@@ -12,7 +12,7 @@
         
         <!-- Header -->
         <div class="text-center space-y-2 border-b border-gray-800 pb-4">
-            <h1 class="text-2xl font-bold tracking-tight text-emerald-400">THE CRICKET HUB</h1>
+            <h1 class="text-2xl font-bold tracking-tight text-indigo-400">THE CRICKET HUB</h1>
             <p class="text-xs uppercase tracking-widest text-gray-400">Cashfree Sandbox Gateway</p>
         </div>
 
@@ -43,7 +43,7 @@
                     <span>-₹{{ number_format($booking->discount_amount, 2) }}</span>
                 </div>
                 @endif
-                <div class="flex justify-between text-base font-bold text-emerald-400 border-t border-gray-800/80 pt-2">
+                <div class="flex justify-between text-base font-bold text-indigo-400 border-t border-gray-800/80 pt-2">
                     <span>Amount Due ({{ $booking->payment_type }}):</span>
                     <span>₹{{ number_format($amount, 2) }}</span>
                 </div>
@@ -60,7 +60,7 @@
                 @csrf
                 <input type="hidden" name="order_id" value="{{ $orderId }}">
                 
-                <button type="submit" name="action" value="SUCCESS" class="w-full bg-emerald-500 hover:bg-emerald-600 active:scale-[0.99] text-gray-950 font-bold py-3 px-4 rounded-xl transition duration-150 shadow-lg shadow-emerald-500/20">
+                <button type="submit" name="action" value="SUCCESS" class="w-full bg-indigo-500 hover:bg-indigo-600 active:scale-[0.99] text-gray-950 font-bold py-3 px-4 rounded-xl transition duration-150 shadow-lg shadow-indigo-500/20">
                     Simulate Successful Payment
                 </button>
                 

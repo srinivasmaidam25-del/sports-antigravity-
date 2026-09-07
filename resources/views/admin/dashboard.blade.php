@@ -39,7 +39,7 @@
     <!-- Navbar -->
     <nav class="bg-gray-900 border-b border-gray-800 px-6 py-4 flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <span class="text-xl font-bold tracking-wider text-emerald-400">THE CRICKET HUB</span>
+            <span class="text-xl font-bold tracking-wider text-indigo-400">THE CRICKET HUB</span>
             <span class="bg-gray-800 text-gray-400 text-xs px-2 py-1 rounded">Control Panel</span>
         </div>
         <div class="flex items-center space-x-4">
@@ -58,7 +58,7 @@
         
         <!-- Flash messages -->
         @if(session('success'))
-            <div class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-4 rounded-xl text-sm">
+            <div class="bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 p-4 rounded-xl text-sm">
                 {{ session('success') }}
             </div>
         @endif
@@ -72,7 +72,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             <div class="bg-gray-900 border border-gray-800 p-5 rounded-2xl space-y-2">
                 <span class="text-xs text-gray-400 uppercase font-semibold">Total Revenue</span>
-                <div class="text-2xl font-bold text-emerald-400">₹{{ number_format($totalRevenue, 2) }}</div>
+                <div class="text-2xl font-bold text-indigo-400">₹{{ number_format($totalRevenue, 2) }}</div>
             </div>
             <div class="bg-gray-900 border border-gray-800 p-5 rounded-2xl space-y-2">
                 <span class="text-xs text-gray-400 uppercase font-semibold">Confirmed Bookings</span>
@@ -90,27 +90,27 @@
 
         <!-- Tab Controls Navigation -->
         <div class="flex flex-wrap border-b border-gray-850 gap-2">
-            <button @click="tab = 'bookings'" :class="tab === 'bookings' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+            <button @click="tab = 'bookings'" :class="tab === 'bookings' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                 Bookings
             </button>
-            <button @click="tab = 'manual'" :class="tab === 'manual' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+            <button @click="tab = 'manual'" :class="tab === 'manual' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                 Manual Booking
             </button>
-            <button @click="tab = 'payments'" :class="tab === 'payments' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+            <button @click="tab = 'payments'" :class="tab === 'payments' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                 Payments
             </button>
-            <button @click="tab = 'interests'" :class="tab === 'interests' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+            <button @click="tab = 'interests'" :class="tab === 'interests' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                 Interest Leads ({{ $totalInterestsCount }})
             </button>
             @if(Auth::user()->role !== 'staff')
-                <button @click="tab = 'coupons'" :class="tab === 'coupons' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+                <button @click="tab = 'coupons'" :class="tab === 'coupons' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                     Coupons
                 </button>
-                <button @click="tab = 'settings'" :class="tab === 'settings' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+                <button @click="tab = 'settings'" :class="tab === 'settings' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                     Settings
                 </button>
             @endif
-            <button @click="tab = 'audit'" :class="tab === 'audit' ? 'border-emerald-500 text-emerald-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
+            <button @click="tab = 'audit'" :class="tab === 'audit' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-gray-400 hover:text-white'" class="border-b-2 font-bold text-sm py-3 px-4 transition-all duration-200 hover:scale-[1.08] active:scale-[0.95]">
                 Audit Logs
             </button>
         </div>
@@ -134,7 +134,7 @@
                     <tbody class="divide-y divide-gray-850">
                         @foreach($bookings as $booking)
                             <tr class="hover:bg-gray-850/30">
-                                <td class="p-4 font-mono text-emerald-400">#{{ $booking->id }}</td>
+                                <td class="p-4 font-mono text-indigo-400">#{{ $booking->id }}</td>
                                 <td class="p-4 text-white">
                                     {{ $booking->user->name ?? 'Guest/Anonymous' }}
                                     <span class="block text-xs text-gray-500">{{ $booking->user->phone ?? '' }}</span>
@@ -142,12 +142,12 @@
                                 <td class="p-4">{{ $booking->facility->name }}</td>
                                 <td class="p-4">
                                     {{ $booking->booking_date->format('d M Y') }}
-                                    <span class="block text-xs text-emerald-400 font-medium">{{ Carbon\Carbon::parse($booking->start_time)->format('h:i A') }} - {{ Carbon\Carbon::parse($booking->end_time)->format('h:i A') }}</span>
+                                    <span class="block text-xs text-indigo-400 font-medium">{{ Carbon\Carbon::parse($booking->start_time)->format('h:i A') }} - {{ Carbon\Carbon::parse($booking->end_time)->format('h:i A') }}</span>
                                 </td>
                                 <td class="p-4 text-white">₹{{ number_format($booking->final_price, 2) }}</td>
                                 <td class="p-4">
                                     <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-semibold
-                                        @if($booking->status === 'CONFIRMED') bg-emerald-500/10 text-emerald-400
+                                        @if($booking->status === 'CONFIRMED') bg-indigo-500/10 text-indigo-400
                                         @elseif($booking->status === 'PENDING') bg-amber-500/10 text-amber-400
                                         @elseif($booking->status === 'CANCELLED') bg-gray-500/10 text-gray-400
                                         @else bg-rose-500/10 text-rose-400 @endif">
@@ -185,18 +185,18 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label for="man_name" class="text-xs text-gray-400 block mb-1">Customer Name</label>
-                        <input type="text" id="man_name" name="customer_name" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none">
+                        <input type="text" id="man_name" name="customer_name" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none">
                     </div>
                     <div>
                         <label for="man_phone" class="text-xs text-gray-400 block mb-1">Customer Mobile</label>
-                        <input type="text" id="man_phone" name="customer_phone" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none">
+                        <input type="text" id="man_phone" name="customer_phone" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label for="man_fac" class="text-xs text-gray-400 block mb-1">Facility</label>
-                        <select id="man_fac" name="facility_id" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none">
+                        <select id="man_fac" name="facility_id" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none">
                             @foreach($facilities as $facility)
                                 <option value="{{ $facility->id }}">{{ $facility->name }} ({{ $facility->dimensions }})</option>
                             @endforeach
@@ -204,27 +204,27 @@
                     </div>
                     <div>
                         <label for="man_date" class="text-xs text-gray-400 block mb-1">Date</label>
-                        <input type="date" id="man_date" name="booking_date" min="{{ now()->format('Y-m-d') }}" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none">
+                        <input type="date" id="man_date" name="booking_date" min="{{ now()->format('Y-m-d') }}" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none">
                     </div>
                     <div class="grid grid-cols-2 gap-2">
                         <div>
                             <label for="man_start" class="text-xs text-gray-400 block mb-1">Start Time</label>
-                            <input type="text" id="man_start" name="start_time" placeholder="09:00:00" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none">
+                            <input type="text" id="man_start" name="start_time" placeholder="09:00:00" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none">
                         </div>
                         <div>
                             <label for="man_end" class="text-xs text-gray-400 block mb-1">End Time</label>
-                            <input type="text" id="man_end" name="end_time" placeholder="10:00:00" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none">
+                            <input type="text" id="man_end" name="end_time" placeholder="10:00:00" required class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none">
                         </div>
                     </div>
                 </div>
 
                 <div>
                     <label for="man_notes" class="text-xs text-gray-400 block mb-1">Staff Notes</label>
-                    <textarea id="man_notes" name="notes" placeholder="Cash collection details..." class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-emerald-500 outline-none" rows="2"></textarea>
+                    <textarea id="man_notes" name="notes" placeholder="Cash collection details..." class="w-full bg-gray-950 border border-gray-800 rounded p-3 text-sm text-white focus:border-indigo-500 outline-none" rows="2"></textarea>
                 </div>
 
                 <div class="pt-2">
-                    <button type="submit" class="bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold py-3 px-6 rounded-xl transition">
+                    <button type="submit" class="bg-indigo-500 hover:bg-indigo-600 text-gray-950 font-bold py-3 px-6 rounded-xl transition">
                         Confirm Manual Booking
                     </button>
                 </div>
@@ -252,7 +252,7 @@
                             <tr class="hover:bg-gray-850/30">
                                 <td class="p-4 font-mono text-gray-350">#PAY-{{ $payment->id }}</td>
                                 <td class="p-4 font-mono text-gray-300">{{ $payment->transaction_reference }}</td>
-                                <td class="p-4 text-emerald-400 font-semibold">
+                                <td class="p-4 text-indigo-400 font-semibold">
                                     @if($payment->booking_id === 0)
                                         <span class="text-blue-400 uppercase text-xs">Membership</span>
                                     @else
@@ -263,7 +263,7 @@
                                 <td class="p-4">{{ $payment->gateway }}</td>
                                 <td class="p-4">
                                     <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-semibold
-                                        @if($payment->status === 'SUCCESS') bg-emerald-500/10 text-emerald-400
+                                        @if($payment->status === 'SUCCESS') bg-indigo-500/10 text-indigo-400
                                         @elseif($payment->status === 'PENDING') bg-amber-500/10 text-amber-400
                                         @elseif($payment->status === 'FAILED') bg-rose-500/10 text-rose-400
                                         @else bg-blue-500/10 text-blue-400 @endif">
@@ -305,13 +305,13 @@
                                 <td class="p-4 text-gray-300">{{ $lead->facility->name }}</td>
                                 <td class="p-4">
                                     {{ $lead->interested_date->format('d M Y') }}
-                                    <span class="block text-xs text-emerald-400 font-medium">{{ Carbon\Carbon::parse($lead->interested_time)->format('h:i A') }}</span>
+                                    <span class="block text-xs text-indigo-400 font-medium">{{ Carbon\Carbon::parse($lead->interested_time)->format('h:i A') }}</span>
                                 </td>
                                 <td class="p-4">
                                     <span class="inline-block text-xs px-2.5 py-0.5 rounded-full font-semibold
                                         @if($lead->status === 'NEW') bg-blue-500/10 text-blue-400
                                         @elseif($lead->status === 'CONTACTED') bg-amber-500/10 text-amber-400
-                                        @elseif($lead->status === 'CONVERTED') bg-emerald-500/10 text-emerald-400
+                                        @elseif($lead->status === 'CONVERTED') bg-indigo-500/10 text-indigo-400
                                         @else bg-gray-500/10 text-gray-400 @endif">
                                         {{ $lead->status }}
                                     </span>
@@ -344,7 +344,7 @@
                         @csrf
                         <div>
                             <label for="cp_code" class="text-xs text-gray-400 block mb-1">Coupon Code</label>
-                            <input type="text" id="cp_code" name="code" required placeholder="DIWALI50" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-white outline-none focus:border-emerald-500 uppercase">
+                            <input type="text" id="cp_code" name="code" required placeholder="DIWALI50" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-white outline-none focus:border-indigo-500 uppercase">
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -377,7 +377,7 @@
                             <label for="cp_lim" class="text-xs text-gray-400 block mb-1">Total Usage Limit</label>
                             <input type="number" id="cp_lim" name="usage_limit" placeholder="Unlimited" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-white outline-none">
                         </div>
-                        <button type="submit" class="w-full bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold py-2.5 px-4 rounded-xl transition">
+                        <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-600 text-gray-950 font-bold py-2.5 px-4 rounded-xl transition">
                             Create Coupon
                         </button>
                     </form>
@@ -401,14 +401,14 @@
                                 @foreach($coupons as $coupon)
                                     <tr class="hover:bg-gray-850/30">
                                         <td class="p-3 font-bold text-white tracking-wide uppercase">{{ $coupon->code }}</td>
-                                        <td class="p-3 text-emerald-400">
+                                        <td class="p-3 text-indigo-400">
                                             {{ $coupon->discount_type === 'PERCENTAGE' ? number_format($coupon->discount_value, 0) . '%' : '₹' . number_format($coupon->discount_value, 0) }}
                                         </td>
                                         <td class="p-3 text-xs">{{ $coupon->times_used }} / {{ $coupon->usage_limit ?? '∞' }}</td>
                                         <td class="p-3 text-xs">{{ $coupon->starts_at->format('d M Y') }}</td>
                                         <td class="p-3 text-xs">{{ $coupon->ends_at->format('d M Y') }}</td>
                                         <td class="p-3 text-xs">
-                                            <span class="text-xs font-semibold {{ $coupon->is_active && $coupon->ends_at->isAfter(now()) ? 'text-emerald-400' : 'text-gray-500' }}">
+                                            <span class="text-xs font-semibold {{ $coupon->is_active && $coupon->ends_at->isAfter(now()) ? 'text-indigo-400' : 'text-gray-500' }}">
                                                 {{ $coupon->is_active && $coupon->ends_at->isAfter(now()) ? 'Active' : 'Expired/Inactive' }}
                                             </span>
                                         </td>
@@ -433,48 +433,48 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Left Block: Basic settings & Cutoffs -->
                         <div class="space-y-4">
-                            <h4 class="text-sm font-bold uppercase tracking-wider text-emerald-400 border-b border-gray-800 pb-2">Business Settings</h4>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-indigo-400 border-b border-gray-800 pb-2">Business Settings</h4>
                             
                             <div>
                                 <label for="set_cutoff" class="text-xs text-gray-400 block mb-1">Friday Weekend Start Cutoff Time</label>
-                                <input type="text" id="set_cutoff" name="friday_weekend_cutoff" required value="{{ $settings['friday_weekend_cutoff'] }}" placeholder="17:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-emerald-500 outline-none">
+                                <input type="text" id="set_cutoff" name="friday_weekend_cutoff" required value="{{ $settings['friday_weekend_cutoff'] }}" placeholder="17:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-indigo-500 outline-none">
                                 <span class="text-[10px] text-gray-500 mt-1 block">24-hour format (e.g. 17:00 = 5:00 PM). Bookings touching/after this are weekend priced.</span>
                             </div>
 
                             <div>
                                 <label for="set_ref" class="text-xs text-gray-400 block mb-1">Referral Discount percentage (%)</label>
-                                <input type="text" id="set_ref" name="referral_discount_percentage" required value="{{ $settings['referral_discount_percentage'] }}" class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-emerald-500 outline-none">
+                                <input type="text" id="set_ref" name="referral_discount_percentage" required value="{{ $settings['referral_discount_percentage'] }}" class="w-full bg-gray-950 border border-gray-800 rounded p-2.5 text-sm text-white focus:border-indigo-500 outline-none">
                                 <span class="text-[10px] text-gray-500 mt-1 block">Percentage value coupon awarded to referrers.</span>
                             </div>
 
-                            <h4 class="text-sm font-bold uppercase tracking-wider text-emerald-400 border-b border-gray-800 pb-2 pt-2">Operational Timings</h4>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-indigo-400 border-b border-gray-800 pb-2 pt-2">Operational Timings</h4>
                             
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label for="mon_thu_start" class="text-xs text-gray-400 block mb-1">Mon–Thu Open</label>
-                                    <input type="text" id="mon_thu_start" name="operating_hours_mon_thu_start" required value="{{ $settings['operating_hours_mon_thu']['start'] }}" placeholder="06:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-emerald-500 outline-none">
+                                    <input type="text" id="mon_thu_start" name="operating_hours_mon_thu_start" required value="{{ $settings['operating_hours_mon_thu']['start'] }}" placeholder="06:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-indigo-500 outline-none">
                                 </div>
                                 <div>
                                     <label for="mon_thu_end" class="text-xs text-gray-400 block mb-1">Mon–Thu Close</label>
-                                    <input type="text" id="mon_thu_end" name="operating_hours_mon_thu_end" required value="{{ $settings['operating_hours_mon_thu']['end'] }}" placeholder="23:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-emerald-500 outline-none">
+                                    <input type="text" id="mon_thu_end" name="operating_hours_mon_thu_end" required value="{{ $settings['operating_hours_mon_thu']['end'] }}" placeholder="23:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-indigo-500 outline-none">
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-2 gap-2">
                                 <div>
                                     <label for="fri_sun_start" class="text-xs text-gray-400 block mb-1">Fri–Sun Open</label>
-                                    <input type="text" id="fri_sun_start" name="operating_hours_fri_sun_start" required value="{{ $settings['operating_hours_fri_sun']['start'] }}" placeholder="06:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-emerald-500 outline-none">
+                                    <input type="text" id="fri_sun_start" name="operating_hours_fri_sun_start" required value="{{ $settings['operating_hours_fri_sun']['start'] }}" placeholder="06:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-indigo-500 outline-none">
                                 </div>
                                 <div>
                                     <label for="fri_sun_end" class="text-xs text-gray-400 block mb-1">Fri–Sun Close</label>
-                                    <input type="text" id="fri_sun_end" name="operating_hours_fri_sun_end" required value="{{ $settings['operating_hours_fri_sun']['end'] }}" placeholder="00:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-emerald-500 outline-none">
+                                    <input type="text" id="fri_sun_end" name="operating_hours_fri_sun_end" required value="{{ $settings['operating_hours_fri_sun']['end'] }}" placeholder="00:00" class="w-full bg-gray-950 border border-gray-800 rounded p-2 text-xs text-white focus:border-indigo-500 outline-none">
                                 </div>
                             </div>
                         </div>
 
                         <!-- Right Block: Facility Prices -->
                         <div class="space-y-4">
-                            <h4 class="text-sm font-bold uppercase tracking-wider text-emerald-400 border-b border-gray-800 pb-2">Facility Prices (Hourly / Slot)</h4>
+                            <h4 class="text-sm font-bold uppercase tracking-wider text-indigo-400 border-b border-gray-800 pb-2">Facility Prices (Hourly / Slot)</h4>
                             
                             @foreach($facilities as $facility)
                                 <div class="bg-gray-950 p-3 rounded-lg border border-gray-850 space-y-2">
@@ -482,11 +482,11 @@
                                     <div class="grid grid-cols-2 gap-2">
                                         <div>
                                             <label class="text-[10px] text-gray-500 block mb-0.5">Weekday Rate (₹)</label>
-                                            <input type="number" name="facility_prices[{{ $facility->id }}][weekday]" required value="{{ $facility->base_price_weekday }}" class="w-full bg-gray-900 border border-gray-800 rounded p-1.5 text-xs text-white focus:border-emerald-500 outline-none">
+                                            <input type="number" name="facility_prices[{{ $facility->id }}][weekday]" required value="{{ $facility->base_price_weekday }}" class="w-full bg-gray-900 border border-gray-800 rounded p-1.5 text-xs text-white focus:border-indigo-500 outline-none">
                                         </div>
                                         <div>
                                             <label class="text-[10px] text-gray-500 block mb-0.5">Weekend Rate (₹)</label>
-                                            <input type="number" name="facility_prices[{{ $facility->id }}][weekend]" required value="{{ $facility->base_price_weekend }}" class="w-full bg-gray-900 border border-gray-800 rounded p-1.5 text-xs text-white focus:border-emerald-500 outline-none">
+                                            <input type="number" name="facility_prices[{{ $facility->id }}][weekend]" required value="{{ $facility->base_price_weekend }}" class="w-full bg-gray-900 border border-gray-800 rounded p-1.5 text-xs text-white focus:border-indigo-500 outline-none">
                                         </div>
                                     </div>
                                 </div>
@@ -495,7 +495,7 @@
                     </div>
 
                     <div class="pt-4 border-t border-gray-800">
-                        <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 hover:scale-[1.03] active:scale-[0.98] text-gray-950 font-bold py-3 px-6 rounded-xl transition duration-150">
+                        <button type="submit" class="bg-indigo-500 hover:bg-indigo-400 hover:scale-[1.03] active:scale-[0.98] text-gray-950 font-bold py-3 px-6 rounded-xl transition duration-150">
                             Save Operational Settings & Pricing
                         </button>
                     </div>

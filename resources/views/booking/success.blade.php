@@ -10,7 +10,7 @@
     <div class="max-w-md w-full bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl overflow-hidden p-6 space-y-6 text-center">
         
         <!-- Success Icon -->
-        <div class="mx-auto w-16 h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center text-emerald-400">
+        <div class="mx-auto w-16 h-16 bg-indigo-500/10 border border-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
             </svg>
@@ -25,7 +25,7 @@
         <div class="bg-gray-950 p-4 rounded-xl space-y-3 border border-gray-800/50 text-left text-sm">
             <div class="flex justify-between">
                 <span class="text-gray-500">Booking ID:</span>
-                <span class="font-mono text-emerald-400">#CHUB-{{ $booking->id }}</span>
+                <span class="font-mono text-indigo-400">#CHUB-{{ $booking->id }}</span>
             </div>
             <div class="flex justify-between">
                 <span class="text-gray-500">Facility:</span>
@@ -57,7 +57,7 @@
 
         <!-- CTA -->
         <div class="pt-4 border-t border-gray-800">
-            <a href="{{ route('dashboard') }}" class="inline-block w-full bg-emerald-500 hover:bg-emerald-600 active:scale-[0.99] text-gray-950 font-bold py-3 px-4 rounded-xl transition duration-150 shadow-lg shadow-emerald-500/20">
+            <a href="{{ route('dashboard') }}" class="inline-block w-full bg-indigo-500 hover:bg-indigo-600 active:scale-[0.99] text-gray-950 font-bold py-3 px-4 rounded-xl transition duration-150 shadow-lg shadow-indigo-500/20">
                 Go to Dashboard
             </a>
         </div>
