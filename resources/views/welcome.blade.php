@@ -72,8 +72,8 @@
                 @auth
                     <a href="{{ route('dashboard') }}" class="text-sm font-semibold text-emerald-400 hover:underline">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-400 hover:text-white transition">Sign In</a>
-                    <a href="{{ route('register') }}" class="hidden sm:inline-block bg-emerald-500 hover:bg-emerald-600 text-gray-950 font-bold text-sm px-5 py-2.5 rounded-lg transition">Sign Up</a>
+                    <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-400 hover:text-white hover:scale-110 transition-all duration-200">Sign In</a>
+                    <a href="{{ route('register') }}" class="hidden sm:inline-block bg-emerald-500 hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-0.5 hover:scale-105 active:scale-95 text-gray-950 font-bold text-sm px-5 py-2.5 rounded-lg transition-all duration-300">Sign Up</a>
                 @endauth
             </div>
         </div>
