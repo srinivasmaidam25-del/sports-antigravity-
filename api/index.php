@@ -19,17 +19,12 @@ if (file_exists($sqliteSrc) && !file_exists($sqliteDst)) {
 }
 
 // Database configuration defaults
-$currentDb = getenv('DB_CONNECTION') ?: ($_ENV['DB_CONNECTION'] ?? null);
-if (empty($currentDb)) {
-    // Default to sqlite on Vercel for instant reliability
-    putenv('DB_CONNECTION=sqlite');
-    $_ENV['DB_CONNECTION'] = 'sqlite';
-    $_SERVER['DB_CONNECTION'] = 'sqlite';
-    $dbPath = file_exists($sqliteDst) ? $sqliteDst : $sqliteSrc;
-    putenv('DB_DATABASE=' . $dbPath);
-    $_ENV['DB_DATABASE'] = $dbPath;
-    $_SERVER['DB_DATABASE'] = $dbPath;
-} elseif ($currentDb === 'pgsql') {
+$currentDb = getenv('DB_CONNECTION') ?: ($_ENV['DB_CONNECTION'] ?? 'pgsql');
+putenv('DB_CONNECTION=' . $currentDb);
+$_ENV['DB_CONNECTION'] = $currentDb;
+$_SERVER['DB_CONNECTION'] = $currentDb;
+
+if ($currentDb === 'pgsql') {
     if (empty(getenv('DB_HOST')) || empty($_ENV['DB_HOST'])) {
         putenv('DB_HOST=52.74.252.201');
         $_ENV['DB_HOST'] = '52.74.252.201';

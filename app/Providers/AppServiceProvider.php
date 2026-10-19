@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || env('VERCEL') || env('APP_STORAGE')) {
             URL::forceScheme('https');
 
-            $dbConnection = env('DB_CONNECTION', 'sqlite');
+            $dbConnection = env('DB_CONNECTION', 'pgsql');
             Config::set('database.default', $dbConnection);
 
             if ($dbConnection === 'sqlite') {
