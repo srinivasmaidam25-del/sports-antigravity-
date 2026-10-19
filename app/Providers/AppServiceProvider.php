@@ -26,8 +26,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (isset($_ENV['VERCEL']) || isset($_SERVER['VERCEL']) || env('VERCEL') || env('APP_STORAGE')) {
-            Config::set('database.default', 'pgsql');
             URL::forceScheme('https');
+
+            $dbConnection = env('DB_CONNECTION', 'sqlite');
+            Config::set('database.default', $dbConnection);
+
+            if ($dbConnection === 'sqlite') {
+                $sqlitePath = file_exists('/tmp/database.sqlite') ? '/tmp/database.sqlite' : database_path('database.sqlite');
+                Config::set('database.connections.sqlite.database', $sqlitePath);
+            }
         }
     }
 }

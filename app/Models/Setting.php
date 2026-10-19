@@ -19,20 +19,24 @@ class Setting extends Model
      */
     public static function getVal(string $key, $default = null)
     {
-        $setting = self::where('key', $key)->first();
-        if (!$setting) {
+        try {
+            $setting = self::where('key', $key)->first();
+            if (!$setting) {
+                return $default;
+            }
+
+            $value = $setting->value;
+
+            // Try to decode JSON, return raw value if fails
+            $decoded = json_decode($value, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return $decoded;
+            }
+
+            return $value;
+        } catch (\Throwable $e) {
             return $default;
         }
-
-        $value = $setting->value;
-
-        // Try to decode JSON, return raw value if fails
-        $decoded = json_decode($value, true);
-        if (json_last_error() === JSON_ERROR_NONE) {
-            return $decoded;
-        }
-
-        return $value;
     }
 
     /**

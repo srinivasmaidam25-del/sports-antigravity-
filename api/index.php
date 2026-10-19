@@ -11,41 +11,55 @@ if (empty(getenv('APP_KEY')) || empty($_ENV['APP_KEY'])) {
     $_SERVER['APP_KEY'] = 'base64:ud3fMi4RmPv3+peN8tnBdFZYdDsVnVTXDsVtKB8Hj+s=';
 }
 
-// Fallback Database configurations with strict empty() checks
-if (empty(getenv('DB_CONNECTION')) || empty($_ENV['DB_CONNECTION'])) {
-    putenv('DB_CONNECTION=pgsql');
-    $_ENV['DB_CONNECTION'] = 'pgsql';
-    $_SERVER['DB_CONNECTION'] = 'pgsql';
+// Copy SQLite database to writable /tmp on serverless if present
+$sqliteSrc = dirname(__DIR__) . '/database/database.sqlite';
+$sqliteDst = '/tmp/database.sqlite';
+if (file_exists($sqliteSrc) && !file_exists($sqliteDst)) {
+    @copy($sqliteSrc, $sqliteDst);
 }
-if (empty(getenv('DB_HOST')) || empty($_ENV['DB_HOST'])) {
-    putenv('DB_HOST=52.74.252.201');
-    $_ENV['DB_HOST'] = '52.74.252.201';
-    $_SERVER['DB_HOST'] = '52.74.252.201';
-}
-if (empty(getenv('DB_PORT')) || empty($_ENV['DB_PORT'])) {
-    putenv('DB_PORT=6543');
-    $_ENV['DB_PORT'] = '6543';
-    $_SERVER['DB_PORT'] = '6543';
-}
-if (empty(getenv('DB_DATABASE')) || empty($_ENV['DB_DATABASE'])) {
-    putenv('DB_DATABASE=postgres');
-    $_ENV['DB_DATABASE'] = 'postgres';
-    $_SERVER['DB_DATABASE'] = 'postgres';
-}
-if (empty(getenv('DB_USERNAME')) || empty($_ENV['DB_USERNAME'])) {
-    putenv('DB_USERNAME=postgres.skjaklxscvginnvpdyvj');
-    $_ENV['DB_USERNAME'] = 'postgres.skjaklxscvginnvpdyvj';
-    $_SERVER['DB_USERNAME'] = 'postgres.skjaklxscvginnvpdyvj';
-}
-if (empty(getenv('DB_PASSWORD')) || empty($_ENV['DB_PASSWORD'])) {
-    putenv('DB_PASSWORD=Srinu9121085544');
-    $_ENV['DB_PASSWORD'] = 'Srinu9121085544';
-    $_SERVER['DB_PASSWORD'] = 'Srinu9121085544';
-}
-if (empty(getenv('DB_SSLMODE')) || empty($_ENV['DB_SSLMODE'])) {
-    putenv('DB_SSLMODE=prefer');
-    $_ENV['DB_SSLMODE'] = 'prefer';
-    $_SERVER['DB_SSLMODE'] = 'prefer';
+
+// Database configuration defaults
+$currentDb = getenv('DB_CONNECTION') ?: ($_ENV['DB_CONNECTION'] ?? null);
+if (empty($currentDb)) {
+    // Default to sqlite on Vercel for instant reliability
+    putenv('DB_CONNECTION=sqlite');
+    $_ENV['DB_CONNECTION'] = 'sqlite';
+    $_SERVER['DB_CONNECTION'] = 'sqlite';
+    $dbPath = file_exists($sqliteDst) ? $sqliteDst : $sqliteSrc;
+    putenv('DB_DATABASE=' . $dbPath);
+    $_ENV['DB_DATABASE'] = $dbPath;
+    $_SERVER['DB_DATABASE'] = $dbPath;
+} elseif ($currentDb === 'pgsql') {
+    if (empty(getenv('DB_HOST')) || empty($_ENV['DB_HOST'])) {
+        putenv('DB_HOST=52.74.252.201');
+        $_ENV['DB_HOST'] = '52.74.252.201';
+        $_SERVER['DB_HOST'] = '52.74.252.201';
+    }
+    if (empty(getenv('DB_PORT')) || empty($_ENV['DB_PORT'])) {
+        putenv('DB_PORT=6543');
+        $_ENV['DB_PORT'] = '6543';
+        $_SERVER['DB_PORT'] = '6543';
+    }
+    if (empty(getenv('DB_DATABASE')) || empty($_ENV['DB_DATABASE'])) {
+        putenv('DB_DATABASE=postgres');
+        $_ENV['DB_DATABASE'] = 'postgres';
+        $_SERVER['DB_DATABASE'] = 'postgres';
+    }
+    if (empty(getenv('DB_USERNAME')) || empty($_ENV['DB_USERNAME'])) {
+        putenv('DB_USERNAME=postgres.skjaklxscvginnvpdyvj');
+        $_ENV['DB_USERNAME'] = 'postgres.skjaklxscvginnvpdyvj';
+        $_SERVER['DB_USERNAME'] = 'postgres.skjaklxscvginnvpdyvj';
+    }
+    if (empty(getenv('DB_PASSWORD')) || empty($_ENV['DB_PASSWORD'])) {
+        putenv('DB_PASSWORD=Srinu9121085544');
+        $_ENV['DB_PASSWORD'] = 'Srinu9121085544';
+        $_SERVER['DB_PASSWORD'] = 'Srinu9121085544';
+    }
+    if (empty(getenv('DB_SSLMODE')) || empty($_ENV['DB_SSLMODE'])) {
+        putenv('DB_SSLMODE=prefer');
+        $_ENV['DB_SSLMODE'] = 'prefer';
+        $_SERVER['DB_SSLMODE'] = 'prefer';
+    }
 }
 
 putenv('APP_MAINTENANCE_DRIVER=file');
